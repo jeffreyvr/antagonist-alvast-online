@@ -17,6 +17,6 @@ The Gutenberg/Block Editor from WordPress does not work correctly with Alvast On
 
 == Installation ==
 
-1. Install the plugin from your WordPress admin, or upload and install the plugin folder to your plugins directory (e.g. /wp-content/plugins/)
+1. Upload and install the plugin folder to your plugins directory (e.g. /wp-content/plugins/)
 2. Activate the plugin
 3. Add the following to wp-config.php before wp-settings.php is loaded: define('ALVAST_ONLINE_DOMAIN', 'yourdomain.alvast-online.nl');

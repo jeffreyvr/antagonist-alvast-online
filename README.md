@@ -6,7 +6,15 @@ The Gutenberg/Block Editor from WordPress does not work correctly with Alvast On
 
 This is not an official Antagonist plugin.
 
-# Links
+[Download Plugin](https://github.com/jeffreyvr/antagonist-alvast-online/releases/latest/download/antagonist-alvast-online.zip)
+
+## Installation
+
+* Upload and install the plugin folder to your plugins directory (e.g. /wp-content/plugins/)
+* Activate the plugin
+* Add the following to wp-config.php before wp-settings.php is loaded: `define('ALVAST_ONLINE_DOMAIN', 'yourdomain.alvast-online.nl');`
+
+## Links
 
 * [Alvast Online](https://www.alvast-online.nl)
 * [Alvast Online: hoe werkt het eigenlijk?](https://www.antagonist.nl/blog/alvast-online-uitgelegd/)
