@@ -6,7 +6,7 @@ Tags: antagonist
 Donate link: https://vanrossum.dev/donate
 Requires at least: 5.6
 Tested up to: 5.8
-Stable Tag: 0.1.0
+Stable Tag: 1.0.0
 License: MIT
 
 Fixing Alvast online from Antagonist for WordPress.

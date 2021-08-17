@@ -3,7 +3,7 @@
  * Plugin name: Antagonist Alvast Online
  * Plugin URI: https://vanrossum.dev
  * Description: Fixing Alvast online from Antagonist for WordPress.
- * Version: 0.1.0
+ * Version: 1.0.0
  * Author: Jeffrey van Rossum
  * Author URI: https://www.vanrossum.dev
  */
@@ -31,6 +31,7 @@ class Alvast_Online {
 		add_filter( 'page_link', array( $this, 'replace_domain' ) );
 		add_filter( 'attachment_link', array( $this, 'replace_domain' ) );
 		add_filter( 'post_type_link', array( $this, 'replace_domain' ) );
+		add_filter( 'wp_get_attachment_url', array( $this, 'replace_domain' ) );
 
 		if ( $this->should_buffer_be_applied() ) {
 			add_action( 'init', array( $this, 'start' ) );
@@ -58,10 +59,6 @@ class Alvast_Online {
 		}
 
 		return false;
-	}
-
-	public function site_url() {
-		return 'http://' . ALVAST_ONLINE_DOMAIN;
 	}
 
 	public function replace_domain( $data ) {
