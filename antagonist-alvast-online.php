@@ -3,14 +3,13 @@
  * Plugin name: Antagonist Alvast Online
  * Plugin URI: https://vanrossum.dev
  * Description: Fixing Alvast online from Antagonist for WordPress.
- * Version: 1.0.0
+ * Version: 2.0.0
  * Author: Jeffrey van Rossum
  * Author URI: https://www.vanrossum.dev
  */
 
 class Alvast_Online {
 	private static $instance = null;
-	public $server_name;
 
 	public static function instance() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Alvast_Online ) ) {
@@ -20,9 +19,7 @@ class Alvast_Online {
 		return self::$instance;
 	}
 
-	public function __construct() {
-		$this->server_name = $_SERVER['SERVER_NAME'];
-
+	private function __construct() {
 		if ( ! $this->is_alvast_online_url_set() ) {
 			return;
 		}
@@ -40,29 +37,43 @@ class Alvast_Online {
 	}
 
 	public function is_alvast_online_url_set() {
-		return defined( 'ALVAST_ONLINE_DOMAIN' );
+		return strpos( $_SERVER['HTTP_REFERER'], 'alvast-online.nl' );
 	}
 
-	public function replaceables() {
+	public function get_alvast_online_domain() {
+		return parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_HOST );
+	}
+
+	public function get_domain() {
+		return $_SERVER['SERVER_NAME'];
+	}
+
+	public function get_replaceables() {
+		$alvast_online_domain = $this->get_alvast_online_domain();
+		$domain               = $this->get_domain();
+
 		return array(
-			'http://' . $this->server_name    => 'http://' . ALVAST_ONLINE_DOMAIN,
-			'https://' . $this->server_name   => 'https://' . ALVAST_ONLINE_DOMAIN,
-			'http:\/\/' . $this->server_name  => 'http:\/\/' . ALVAST_ONLINE_DOMAIN,
-			'https:\/\/' . $this->server_name => 'https:\/\/' . ALVAST_ONLINE_DOMAIN
+			'http://' . $domain    => 'http://' . $alvast_online_domain,
+			'https://' . $domain   => 'https://' . $alvast_online_domain,
+			'http:\/\/' . $domain  => 'http:\/\/' . $alvast_online_domain,
+			'https:\/\/' . $domain => 'https:\/\/' . $alvast_online_domain
 		);
 	}
 
 	public function should_buffer_be_applied() {
-		if ( strstr( $_SERVER['REQUEST_URI'], 'wp-admin/post-new.php' ) || strstr( $_SERVER['REQUEST_URI'],
-				'wp-admin/post.php' ) ) {
-			return true;
+		$endpoints = array( 'wp-admin/themes.php', 'wp-admin/post-new.php', 'wp-admin/post.php' );
+
+		foreach ( $endpoints as $endpoint ) {
+			if ( strstr( $_SERVER['REQUEST_URI'], $endpoint ) ) {
+				return true;
+			}
 		}
 
 		return false;
 	}
 
 	public function replace_domain( $data ) {
-		$replaceables = $this->replaceables();
+		$replaceables = $this->get_replaceables();
 
 		return str_replace( array_keys( $replaceables ), array_values( $replaceables ), $data );
 	}

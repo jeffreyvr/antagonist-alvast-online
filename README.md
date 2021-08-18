@@ -12,7 +12,6 @@ This is not an official Antagonist plugin.
 
 * Upload and install the plugin folder to your plugins directory (e.g. /wp-content/plugins/)
 * Activate the plugin
-* Add the following to wp-config.php before wp-settings.php is loaded: `define('ALVAST_ONLINE_DOMAIN', 'yourdomain.alvast-online.nl');`
 
 ## Links
 

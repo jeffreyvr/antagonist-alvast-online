@@ -6,7 +6,7 @@ Tags: antagonist
 Donate link: https://vanrossum.dev/donate
 Requires at least: 5.6
 Tested up to: 5.8
-Stable Tag: 1.0.0
+Stable Tag: 2.0.0
 License: MIT
 
 Fixing Alvast online from Antagonist for WordPress.
@@ -19,4 +19,3 @@ The Gutenberg/Block Editor from WordPress does not work correctly with Alvast On
 
 1. Upload and install the plugin folder to your plugins directory (e.g. /wp-content/plugins/)
 2. Activate the plugin
-3. Add the following to wp-config.php before wp-settings.php is loaded: define('ALVAST_ONLINE_DOMAIN', 'yourdomain.alvast-online.nl');
